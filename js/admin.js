@@ -90,7 +90,14 @@ async function renderAdminCalendar() {
     let html = ''
 
     if (result.success && result.data.length > 0) {
-        result.data.forEach(movie => {
+        const now = Date.now()
+        
+        for (const movie of result.data) {
+            if (movie.parsedDate && movie.parsedDate < now) {
+                await deleteCalendar(movie.id)
+                continue
+            }
+
             const posterSrc = movie.poster
                 ? `https://image.tmdb.org/t/p/w500${movie.poster}`
                 : 'https://placehold.co/154x231/374151/FFFFFF?text=?'
@@ -116,7 +123,7 @@ async function renderAdminCalendar() {
                     </div>
                 </div>
             `
-        })
+        }
     }
 
     html += `

@@ -93,7 +93,19 @@ async function renderMainCalendar() {
     }
 
     let html = ''
-    result.data.forEach(movie => {
+    const now = Date.now()
+    
+    const activeMovies = result.data.filter(movie => {
+        if (!movie.parsedDate) return true
+        return movie.parsedDate > now
+    })
+
+    if (activeMovies.length === 0) {
+        mainCalendarList.innerHTML = '<p class="main-text">Поки немає запланованих показів</p>'
+        return
+    }
+
+    activeMovies.forEach(movie => {
         const posterSrc = movie.poster
             ? `https://image.tmdb.org/t/p/w500${movie.poster}`
             : 'https://placehold.co/154x231/374151/FFFFFF?text=?'

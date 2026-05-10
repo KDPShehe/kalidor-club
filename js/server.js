@@ -105,11 +105,36 @@ export const getScreenings = async () => {
   }
 }
 
+export function parseDateString(dateStr) {
+  const match = dateStr.match(/(\d{1,2})[\.\/-](\d{1,2})/)
+  if (!match) return null
+
+  const day = parseInt(match[1], 10)
+  const month = parseInt(match[2], 10) - 1
+
+  if (isNaN(day) || isNaN(month) || month < 0 || month > 11 || day < 1 || day > 31) {
+    return null
+  }
+
+  const now = new Date()
+  let year = now.getFullYear()
+
+  if (month < now.getMonth() - 1) {
+    year += 1
+  }
+
+  const parsedDate = new Date(year, month, day, 23, 59, 59)
+  return parsedDate.getTime()
+}
+
 export const addCalendar = async (movieData, dateStr) => {
   try {
+    const parsedDate = parseDateString(dateStr)
+
     await addDoc(collection(db, "calendar"), {
       ...movieData,
       date: dateStr,
+      parsedDate: parsedDate,
       addedAt: serverTimestamp()
     })
 
