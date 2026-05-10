@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ККК Адмін-панель</title>
+    <link rel="stylesheet" href="/main.css">
+    <link rel="stylesheet" href="/admin/admin.css">
+    <link rel="icon" type="kalidor/ico" href="/images/kkk-logo-black2.png">
+    <script src="/js/theme.js"></script>
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <a href="./admin.html" class="logo-link">
+                <img src="/images/kkk-logo-white2.png" class="logo-img white">
+                <img src="/images/kkk-logo-black2.png" class="logo-img dark">
+            </a>
+            <h1 class="logo-text">Адмін-панель</h1>
+        </div>
+
+        <div class="theme">
+            <p class="theme-change-but">
+                <img src="/images/sun-ico.png" class="theme-change moon">
+                <img src="/images/moon-ico.png" class="theme-change sun">
+            </p>
+            <p class="add-film-but hidden" id="admin-exit-but">Вийти</p>
+        </div>
+    </header>
+
+    <div class="main admin-main">
+        <div class="login-form">
+            <h1 class="admin-main-text">Вхід для адміністратора</h1>
+
+            <form class="admin-form-container">
+                <div class="admin-input">
+                    <input type="email" id="admin-email" class="add-film" placeholder="Email адміністратора" required
+                        autocomplete="email">
+                    <input type="password" id="admin-password" class="add-film" placeholder="Пароль" required
+                        autocomplete="current-password">
+                </div>
+
+                <div class="admin-but-container">
+                    <p class="add-film-but" id="admin-login-but">Увійти</p>
+                    <span class="movie-title" id="admin-login-message"></span>
+                </div>
+            </form>
+        </div>
+
+        <div class="admin-panel-cont hidden">
+            <div class="section-class" id="admin-calendar">
+                <h1 class="main-text">Управління показами незабаром</h1>
+
+                <div class="calendar-container">
+                    <button class="carousel-btn prev-btn hidden">◀</button>
+
+                    <div class="movies-calendar-container">
+                        <div class="movie-card card-add">
+                            <div class="movie-poster plus-cont">
+                                <span class="movie-title plus">+</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="carousel-btn next-btn hidden">▶</button>
+                </div>
+            </div>
+
+            <div class="section-class" id="admin-all-movies">
+                <h1 class="main-text">Перегляд усих кінострічок</h1>
+
+                <div class="all-movies-container">
+                    <button class="carousel-btn prev-btn hidden">◀</button>
+
+                    <div class="movies-container"></div>
+
+                    <button class="carousel-btn next-btn hidden">▶</button>
+                </div>
+            </div>
+
+            <div class="section-class" id="admin-suggestions">
+                <h1 class="main-text">Запропоновані фільми на перегляд</h1>
+
+                <div class="calendar-container">
+                    <button class="carousel-btn prev-btn hidden">◀</button>
+
+                    <div class="movies-calendar-container" id="suggestion-list"></div>
+
+                    <button class="carousel-btn next-btn hidden">▶</button>
+                </div>
+            </div>
+
+            <div class="section-class" id="admin-rate">
+                <h1 class="main-text">Середні оцінки користувачів</h1>
+
+                <div class="admin-form-container" id="ratings-container">
+                    <p class="admin-main-text">Завантаження статистики...</p>
+                </div>
+            </div>
+        </div>
+
+        <p class="movie-title footer-copyright admin-copyright hidden">© 2026 Клуб Калідорних Кінокритиків. Усі права
+            захищені.</p>
+    </div>
+
+</body>
+<script type="module" src="/js/app.js"></script>
+<script type="module" src="/js/admin.js"></script>
+
+</html>

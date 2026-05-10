@@ -1,0 +1,375 @@
+body {
+    margin: 0;
+}
+
+#admin-exit-but {
+    padding: 1rem 2rem;
+    align-self: center;
+}
+
+#admin-exit-but.hidden {
+    display: none;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: calc(100vh - 100px);
+}
+
+.login-form.hidden {
+    display: none;
+}
+
+.admin-panel-cont {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.admin-panel-cont.hidden {
+    display: none;
+}
+
+.admin-main-text {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 3.2rem;
+    color: var(--text-main);
+    text-decoration: none;
+    text-align: center;
+    margin: 0;
+    width: 100%;
+}
+
+.admin-form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    margin-bottom: 5rem;
+}
+
+.admin-input {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.admin-but-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    justify-content: center;
+    align-items: center;
+}
+
+#admin-login-but {
+    width: 100%;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+#admin-login-message {
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+    max-width: 240px;
+    height: 40px;
+    text-align: center;
+}
+
+#admin-login-message.show {
+    opacity: 1;
+}
+
+.admin-delete-but,
+.admin-plus-but {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 1.5rem 0.5rem;
+    text-align: center;
+    font-size: 1.4rem;
+}
+
+.mini-form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    padding: 1.5rem 1rem;
+}
+
+.custom-select-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.mini-form-select,
+.mini-form-input {
+    width: 100%;
+    border-radius: 8px;
+    background: var(--bg-main);
+    color: var(--text-main);
+    font-family: 'Inter', sans-serif;
+    font-size: 1.3rem;
+    padding: 0.8rem;
+    border: 2px solid var(--bg-main);
+    box-sizing: border-box;
+    outline: none;
+    transition: border-color 0.2s ease-in-out;
+}
+
+.mini-form-select:focus,
+.mini-form-input:focus {
+    border-color: var(--accent);
+}
+
+.mini-form-select {
+    cursor: pointer;
+    user-select: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.custom-select-options {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    width: 100%;
+    max-height: 120px;
+    background: var(--bg-card);
+    border: 2px solid var(--accent);
+    border-radius: 8px;
+    z-index: 100;
+    overflow-y: auto;
+    display: none;
+    flex-direction: column;
+    box-shadow: var(--shadow-card);
+}
+
+.custom-select-options.open {
+    display: flex;
+}
+
+.custom-select-option {
+    padding: 0.8rem;
+    font-size: 1.3rem;
+    font-family: 'Inter', sans-serif;
+    color: var(--text-main);
+    cursor: pointer;
+    text-align: center;
+    transition: background 0.2s ease-in-out;
+}
+
+.custom-select-option:hover {
+    background: var(--bg-card-hover);
+}
+
+.custom-select-options::-webkit-scrollbar {
+    width: 6px;
+}
+
+.custom-select-options::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.custom-select-options::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: 10px;
+}
+
+.mini-form-select:focus,
+.mini-form-input:focus,
+.custom-select-wrapper.active .mini-form-select {
+    border-color: var(--accent);
+}
+
+.mini-form-error {
+    color: #ef4444;
+    font-size: 1.4rem;
+    font-family: 'Inter', sans-serif;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+    margin: -0.5rem 0;
+}
+
+.mini-form-error.show {
+    opacity: 1;
+}
+
+.mini-form-btns {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+    margin-top: auto;
+}
+
+.mini-btn {
+    padding: 0.8rem;
+    border-radius: 8px;
+    cursor: pointer;
+    color: var(--text-main);
+    font-family: 'Inter', sans-serif;
+    background: var(--bg-main);
+    font-size: 1.3rem;
+    text-align: center;
+    margin: 0;
+    transition: all 0.2s ease-in-out;
+}
+
+.mini-btn:hover {
+    background: var(--accent);
+}
+
+#save-scr-btn:hover {
+    background: var(--accent-hover);
+}
+
+.card-add {
+    margin-top: 2.9rem;
+}
+
+.plus-cont {
+    position: relative;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.plus-cont:hover {
+    background: var(--bg-card-hover);
+}
+
+.plus {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 4.8rem;
+    user-select: none;
+}
+
+.admin-poster {
+    display: block;
+}
+
+#ratings-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.rating-row {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.rating-score {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.rating-stars {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.star-yellow {
+    color: var(--accent);
+    font-size: 3.8rem;
+    user-select: none;
+    margin-bottom: 5px;
+}
+
+.star-grey {
+    color: var(--border-color);
+    font-size: 3.8rem;
+    user-select: none;
+    margin-bottom: 5px;
+}
+
+.admin-copyright {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.admin-copyright.hidden {
+    display: none;
+}
+
+/* MEDIA */
+
+@media (max-width: 768px) {
+    .admin-main-text {
+        font-size: 2.4rem;
+    }
+
+    .login-form {
+        gap: 2rem;
+    }
+
+    .admin-form-container {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    #ratings-container {
+        flex-direction: column;
+        gap: 3rem;
+    }
+
+    #admin-exit-but {
+        padding: 0.8rem 1.5rem;
+        font-size: 1.4rem;
+    }
+
+    .mini-form-select,
+    .mini-form-input,
+    .mini-btn,
+    .custom-select-option {
+        font-size: 1.1rem;
+        padding: 0.6rem;
+    }
+
+    .mini-form-error {
+        font-size: 1.1rem;
+    }
+
+    .admin-delete-but,
+    .admin-plus-but {
+        padding: 1.2rem 0.5rem;
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .admin-main-text {
+        font-size: 2rem;
+    }
+
+    .mini-form-select,
+    .mini-form-input,
+    .mini-btn,
+    .custom-select-option {
+        font-size: 1rem;
+        padding: 0.5rem;
+    }
+
+    .mini-form-error {
+        font-size: 1rem;
+    }
+
+    .admin-delete-but,
+    .admin-plus-but {
+        padding: 1rem 0.5rem;
+        font-size: 1.1rem;
+    }
+}

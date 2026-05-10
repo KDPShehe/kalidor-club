@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Клуб Калідорних Кінокритиків</title>
+    <link rel="stylesheet" href="main.css">
+    <link rel="icon" type="kalidor/ico" href="./images/kkk-logo-black2.png">
+    <script src="/js/theme.js"></script>
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <a href="./" class="logo-link">
+                <img src="./images/kkk-logo-white2.png" class="logo-img white">
+                <img src="./images/kkk-logo-black2.png" class="logo-img dark">
+            </a>
+            <h1 class="logo-text">Клуб Калідорних Кінокритиків</h1>
+        </div>
+
+        <div class="theme">
+            <p class="theme-change-but">
+                <img src="./images/sun-ico.png" class="theme-change moon">
+                <img src="./images/moon-ico.png" class="theme-change sun">
+            </p>
+        </div>
+    </header>
+
+    <div class="main">
+        <div class="section-class" id="movie-calendar">
+            <h1 class="main-text">Кінопокази незабаром</h1>
+
+            <div class="calendar-container">
+                <button class="carousel-btn prev-btn hidden">◀</button>
+
+                <div class="movies-calendar-container"></div>
+
+                <button class="carousel-btn next-btn hidden">▶</button>
+            </div>
+        </div>
+
+        <div class="section-class" id="all-movies">
+            <h1 class="main-text">Усі кінострічки</h1>
+
+            <div class="all-movies-container">
+                <button class="carousel-btn prev-btn hidden">◀</button>
+
+                <div class="movies-container"></div>
+
+                <button class="carousel-btn next-btn hidden">▶</button>
+            </div>
+        </div>
+        <div class="section-class" id="form">
+            <h1 class="main-text">Запропонуй фільм на перегляд</h1>
+
+            <div class="form-container">
+                <div class="form-left-column">
+                    <div class="form-input">
+                        <input class="add-film" id="film-add-input" type="text" placeholder="Введи назву..."
+                            maxlength="50" autocomplete="off">
+                    </div>
+
+                    <div class="movie-card">
+                        <div class="movie-poster form-poster">
+                            <img class="poster-img" alt="?">
+                            <span class="movie-title question">?</span>
+                        </div>
+                        <span class="movie-title movie-title-search"></span>
+                    </div>
+
+                    <div class="add-film-container">
+                        <p class="add-film-but" id="suggest-but">Запропонувати!</p>
+                        <span class="movie-title suggest-message"></span>
+                    </div>
+                </div>
+
+                <div class="search-results hidden">
+                </div>
+            </div>
+        </div>
+
+        <div class="section-class" id="rate">
+            <h1 class="main-text">Оціни нашу роботу</h1>
+
+            <div class="container-wrapper">
+                <div class="rating-container">
+                    <p class="movie-title rate-title">Оціни атмосферу на показах</p>
+
+                    <div class="stars">
+                        <input type="radio" name="atmosphere" id="r1-star5" value="5">
+                        <label for="r1-star5" title="5 зірок">★</label>
+
+                        <input type="radio" name="atmosphere" id="r1-star4" value="4">
+                        <label for="r1-star4" title="4 зірки">★</label>
+
+                        <input type="radio" name="atmosphere" id="r1-star3" value="3">
+                        <label for="r1-star3" title="3 зірки">★</label>
+
+                        <input type="radio" name="atmosphere" id="r1-star2" value="2">
+                        <label for="r1-star52" title="2 зірки">★</label>
+
+                        <input type="radio" name="atmosphere" id="r1-star1" value="1">
+                        <label for="r1-star1" title="1 зірка">★</label>
+                    </div>
+                </div>
+
+                <div class="rating-container">
+                    <p class="movie-title">Оціни якість підбору фільмів</p>
+                    <div class="stars">
+                        <input type="radio" name="quality" id="r2-star5" value="5">
+                        <label for="r2-star5" title="5 зірок">★</label>
+
+                        <input type="radio" name="quality" id="r2-star4" value="4">
+                        <label for="r2-star4" title="4 зірки">★</label>
+
+                        <input type="radio" name="quality" id="r2-star3" value="3">
+                        <label for="r2-star3" title="3 зірки">★</label>
+
+                        <input type="radio" name="quality" id="r2-star2" value="2">
+                        <label for="r2-star2" title="2 зірки">★</label>
+
+                        <input type="radio" name="quality" id="r2-star1" value="1">
+                        <label for="r2-star1" title="1 зірка">★</label>
+                    </div>
+                </div>
+
+                <div class="rating-container">
+                    <p class="movie-title">Оціни зручність цього сайту</p>
+                    <div class="stars">
+                        <input type="radio" name="usability" id="r3-star5" value="5">
+                        <label for="r3-star5" title="5 зірок">★</label>
+
+                        <input type="radio" name="usability" id="r3-star4" value="4">
+                        <label for="r3-star4" title="4 зірки">★</label>
+
+                        <input type="radio" name="usability" id="r3-star3" value="3">
+                        <label for="r3-star3" title="3 зірки">★</label>
+
+                        <input type="radio" name="usability" id="r3-star2" value="2">
+                        <label for="r3-star2" title="2 зірки">★</label>
+
+                        <input type="radio" name="usability" id="r3-star1" value="1">
+                        <label for="r3-star1" title="1 зірка">★</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <div class="inner-footer">
+            <div class="logo">
+                <a href="./" class="logo-link">
+                    <img src="./images/kkk-logo-white.png" class="logo-img-footer white">
+                    <img src="./images/kkk-logo-black.png" class="logo-img-footer dark">
+                </a>
+            </div>
+
+            <div class="footer-container">
+                <span class="movie-title footer-title">Наші соцмережі</span>
+                <a href="https://t.me/kalidorclub" class="movie-title footer-text">Telegram</a>
+            </div>
+
+            <div class="footer-container">
+                <span class="movie-title footer-title">Розробник</span>
+                <a href="https://github.com/KDPShehe" class="movie-title footer-text">GitHub</a>
+                <a href="https://linkedin.com/in/mark-holovenko-05a001290" class="movie-title footer-text">Linkedin</a>
+            </div>
+
+            <div class="footer-container">
+                <span class="movie-title footer-title">API</span>
+                <img src="./images/tmdb-logo.svg" class="footer-img">
+                <span class="movie-title api-text">This website uses the TMDB API but is not endorsed or certified by
+                    TMDB.</span>
+            </div>
+        </div>
+        <p class="movie-title footer-copyright">© 2026 Клуб Калідорних Кінокритиків. Усі права захищені.</p>
+    </footer>
+</body>
+<script type="module" src="/js/app.js"></script>
+
+</html>
