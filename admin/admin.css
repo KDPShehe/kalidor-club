@@ -314,6 +314,8 @@ body {
 
     .login-form {
         gap: 2rem;
+        padding: 0 1.5rem;
+        box-sizing: border-box;
     }
 
     .admin-form-container {
