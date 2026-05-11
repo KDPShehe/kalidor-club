@@ -277,6 +277,16 @@ header {
   margin: 0;
 }
 
+.registration-link {
+  color: var(--accent);
+  text-decoration: underline;
+  margin-top: -0.25rem;
+}
+
+.registration-link:hover {
+  color: var(--accent-hover);
+}
+
 /* ALL-MOVIES */
 
 .all-movies-container {

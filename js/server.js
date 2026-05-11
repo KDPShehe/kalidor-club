@@ -127,13 +127,14 @@ export function parseDateString(dateStr) {
   return parsedDate.getTime()
 }
 
-export const addCalendar = async (movieData, dateStr) => {
+export const addCalendar = async (movieData, dateStr, linkStr) => {
   try {
     const parsedDate = parseDateString(dateStr)
 
     await addDoc(collection(db, "calendar"), {
       ...movieData,
       date: dateStr,
+      registrationLink: linkStr || null,
       parsedDate: parsedDate,
       addedAt: serverTimestamp()
     })

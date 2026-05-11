@@ -91,7 +91,7 @@ async function renderAdminCalendar() {
 
     if (result.success && result.data.length > 0) {
         const now = Date.now()
-        
+
         for (const movie of result.data) {
             if (movie.parsedDate && movie.parsedDate < now) {
                 await deleteCalendar(movie.id)
@@ -175,6 +175,7 @@ async function showAddCalendar() {
             <input type="hidden" id="new-scr-movie" value="">
             
             <input type="text" id="new-scr-date" class="mini-form-input" placeholder="Середа 20.05">
+            <input type="url" id="new-scr-link" class="mini-form-input" placeholder="Посилання на реєстрацію">
             
             <span id="mini-form-error" class="mini-form-error"></span>
 
@@ -222,6 +223,7 @@ async function showAddCalendar() {
         e.stopPropagation()
         const movieId = document.getElementById('new-scr-movie').value
         const dateVal = document.getElementById('new-scr-date').value.trim()
+        const linkVal = document.getElementById('new-scr-link').value.trim()
         const errorMsg = document.getElementById('mini-form-error')
 
         if (!movieId || !dateVal) {
@@ -237,7 +239,7 @@ async function showAddCalendar() {
         e.target.textContent = '...'
         e.target.style.pointerEvents = 'none'
 
-        await addCalendar(selectedMovie, dateVal)
+        await addCalendar(selectedMovie, dateVal, linkVal)
         await renderAdminCalendar()
 
         if (typeof renderAllMovies === 'function') {

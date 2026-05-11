@@ -113,6 +113,9 @@ async function renderMainCalendar() {
         const rating = movie.rating || 'NR'
         const genreText = movie.genreText || ''
         const year = movie.year || 'Рік невідомий'
+        const registrationLinkHtml = movie.registrationLink 
+            ? `<a href="${movie.registrationLink}" class="movie-title registration-link" target="_blank" rel="noopener noreferrer">Реєстрація</a>` 
+            : ''
 
         html += `
         <div class="movie-card">
@@ -127,6 +130,7 @@ async function renderMainCalendar() {
                         </div>
                     </div>
                     <span class="movie-title">${movie.title}</span>
+                    ${registrationLinkHtml}
                 </div>
             </div>
         `
