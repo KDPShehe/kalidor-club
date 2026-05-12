@@ -30,14 +30,15 @@ exports.handler = async function (event, context) {
             statusCode: 200,
             headers: {
                 "Content-Type": "application/json",
-                "Access-Control-Allow-Origin": "*"
+                "Access-Control-Allow-Origin": "https://kalidor-club.netlify.app"
             },
             body: JSON.stringify(data)
         }
     } catch (error) {
+        console.error("Помилка запиту до TMDB:", error);
         return {
             statusCode: 500,
-            body: JSON.stringify({ error: error.message })
+            body: JSON.stringify({ error: "Внутрішня помилка сервера при зверненні до зовнішнього API." })
         }
     }
 }
