@@ -18,6 +18,16 @@ export const auth = getAuth(app)
 
 // TMDB
 
+export function escapeHTML(str) {
+  if (!str) return '';
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
 export const TMDB_GENRES = {
   28: 'Бойовик', 12: 'Пригоди', 16: 'Мультфільм', 35: 'Комедія',
   80: 'Кримінал', 99: 'Документальний', 18: 'Драма', 10751: 'Сімейний',
@@ -219,28 +229,29 @@ export const generateMovies = (movies, isAdmin = false) => {
 
   movies.forEach(movie => {
     const posterSrc = movie.poster
-      ? `https://image.tmdb.org/t/p/w500${movie.poster}`
+      ? `https://image.tmdb.org/t/p/w500${escapeHTML(movie.poster)}`
       : 'https://placehold.co/154x231/374151/FFFFFF?text=?'
 
     const deleteButton = isAdmin
-      ? `<p class="add-film-but admin-delete-but" data-id="${movie.id}">Видалити</p>`
+      ? `<p class="add-film-but admin-delete-but" data-id="${escapeHTML(movie.id)}">Видалити</p>`
       : ''
 
-    const rating = movie.rating || 'NR'
-    const genreText = movie.genreText || ''
-    const year = movie.year || 'Рік невідомий'
+    const rating = escapeHTML(movie.rating || 'NR')
+    const genreText = escapeHTML(movie.genreText || '')
+    const year = escapeHTML(movie.year || 'Рік невідомий')
+    const safeTitle = escapeHTML(movie.title)
 
     html += `
           <div class="movie-card">
               <div class="movie-poster">
-                  <img src="${posterSrc}" class="poster-img admin-poster poster" alt="${movie.title}">
+                  <img src="${posterSrc}" class="poster-img admin-poster poster" alt="${safeTitle}">
 
                   <div class="poster-overlay">
                       <div class="poster-overlay-main">Рейтинг: <span class="poster-overlay-text">${rating}/10</span></div>
                       <div class="poster-overlay-text">${genreText}${year}</div>
                   </div>
               </div>
-              <span class="movie-title">${movie.title}</span>
+              <span class="movie-title">${safeTitle}</span>
               ${deleteButton}
           </div>
         `

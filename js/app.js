@@ -1,4 +1,4 @@
-import { addMovieSuggestion, getAllMovies, generateMovies, TMDB_GENRES, getScreenings, generateSkeletonCards } from '/js/server.js'
+import { addMovieSuggestion, getAllMovies, generateMovies, TMDB_GENRES, getScreenings, generateSkeletonCards, escapeHTML } from '/js/server.js'
 
 // Theme change
 const changeThemeBtn = document.querySelectorAll('.theme-change')
@@ -107,29 +107,31 @@ async function renderMainCalendar() {
 
     activeMovies.forEach(movie => {
         const posterSrc = movie.poster
-            ? `https://image.tmdb.org/t/p/w500${movie.poster}`
+            ? `https://image.tmdb.org/t/p/w500${escapeHTML(movie.poster)}`
             : 'https://placehold.co/154x231/374151/FFFFFF?text=?'
 
-        const rating = movie.rating || 'NR'
-        const genreText = movie.genreText || ''
-        const year = movie.year || 'Рік невідомий'
+        const rating = escapeHTML(movie.rating || 'NR')
+        const genreText = escapeHTML(movie.genreText || '')
+        const year = escapeHTML(movie.year || 'Рік невідомий')
+        const safeTitle = escapeHTML(movie.title)
+        const safeDate = escapeHTML(movie.date)
         const registrationLinkHtml = movie.registrationLink 
-            ? `<a href="${movie.registrationLink}" class="movie-title registration-link" target="_blank" rel="noopener noreferrer">Реєстрація</a>` 
+            ? `<a href="${escapeHTML(movie.registrationLink)}" class="movie-title registration-link" target="_blank" rel="noopener noreferrer">Реєстрація</a>` 
             : ''
 
         html += `
         <div class="movie-card">
-                <span class="movie-date">${movie.date}</span>
+                <span class="movie-date">${safeDate}</span>
                 <div class="movie-details">
                     <div class="movie-poster">
-                        <img src="${posterSrc}" class="poster-img" alt="${movie.title}" style="display: block; width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+                        <img src="${posterSrc}" class="poster-img" alt="${safeTitle}" style="display: block; width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
                         
                         <div class="poster-overlay">
                             <div class="poster-overlay-main">Рейтинг: <span class="poster-overlay-text">${rating}/10</span></div>
                             <div class="poster-overlay-text">${genreText}${year}</div>
                         </div>
                     </div>
-                    <span class="movie-title">${movie.title}</span>
+                    <span class="movie-title">${safeTitle}</span>
                     ${registrationLinkHtml}
                 </div>
             </div>
@@ -265,10 +267,10 @@ function renderResults(movies) {
         item.className = 'search-results-item'
 
         const posterSrc = movie.poster_path
-            ? `https://image.tmdb.org/t/p/w154${movie.poster_path}`
+            ? `https://image.tmdb.org/t/p/w154${escapeHTML(movie.poster_path)}`
             : 'https://placehold.co/154x231/374151/FFFFFF?text=?'
 
-        const releaseYear = movie.release_date ? movie.release_date.split('-')[0] : 'Рік невідомий'
+        const releaseYear = escapeHTML(movie.release_date ? movie.release_date.split('-')[0] : 'Рік невідомий')
 
         let genresText = ''
         if (movie.genre_ids && movie.genre_ids.length > 0) {
@@ -278,14 +280,16 @@ function renderResults(movies) {
                 .filter(name => name !== '')
 
             if (genreNames.length > 0) {
-                genresText = genreNames.join(', ') + ' • '
+                genresText = escapeHTML(genreNames.join(', ') + ' • ')
             }
         }
+        
+        const safeTitle = escapeHTML(movie.title)
 
         item.innerHTML = `
         <img src="${posterSrc}" alt="poster">
         <div class="search-results-info">
-            <span class="search-results-title">${movie.title}</span>
+            <span class="search-results-title">${safeTitle}</span>
             <span class="search-results-meta">${genresText}${releaseYear}</span>
         </div>`
 
@@ -329,13 +333,14 @@ function selectMovie(movie) {
     }
 
     if (movie.poster_path) {
-        const imageUrl = `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+        const imageUrl = `https://image.tmdb.org/t/p/w500${escapeHTML(movie.poster_path)}`
+        const safeTitle = escapeHTML(movie.title)
         posterContainer.innerHTML = `
-            <img src="${imageUrl}" alt="${movie.title}" 
+            <img src="${imageUrl}" alt="${safeTitle}" 
                  style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px; display: block;">
             <div class="poster-overlay">
-                <div class="poster-overlay-main">Рейтинг: <span class="poster-overlay-text">${rating}/10</span></div>
-                <div class="poster-overlay-text">${genreText}${year}</div>
+                <div class="poster-overlay-main">Рейтинг: <span class="poster-overlay-text">${escapeHTML(rating)}/10</span></div>
+                <div class="poster-overlay-text">${escapeHTML(genreText)}${escapeHTML(year)}</div>
             </div>
         `
         posterContainer.style.border = 'none'

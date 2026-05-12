@@ -1,4 +1,4 @@
-import { getAverageRatings, logoutAdmin, loginAdmin, isLogin, getSuggestions, approveMovie, deleteSuggestion, getAllMovies, deleteMovie, generateMovies, getScreenings, addCalendar, deleteCalendar, generateSkeletonCards } from '/js/server.js'
+import { getAverageRatings, logoutAdmin, loginAdmin, isLogin, getSuggestions, approveMovie, deleteSuggestion, getAllMovies, deleteMovie, generateMovies, getScreenings, addCalendar, deleteCalendar, generateSkeletonCards, escapeHTML } from '/js/server.js'
 import { carouselScroll } from '/js/app.js'
 
 // Login/Logout
@@ -99,16 +99,18 @@ async function renderAdminCalendar() {
             }
 
             const posterSrc = movie.poster
-                ? `https://image.tmdb.org/t/p/w500${movie.poster}`
+                ? `https://image.tmdb.org/t/p/w500${escapeHTML(movie.poster)}`
                 : 'https://placehold.co/154x231/374151/FFFFFF?text=?'
 
-            const rating = movie.rating || 'NR'
-            const genreText = movie.genreText || ''
-            const year = movie.year || 'Рік невідомий'
+            const rating = escapeHTML(movie.rating || 'NR')
+            const genreText = escapeHTML(movie.genreText || '')
+            const year = escapeHTML(movie.year || 'Рік невідомий')
+            const safeTitle = escapeHTML(movie.title)
+            const safeDate = escapeHTML(movie.date)
 
             html += `
                 <div class="movie-card">
-                    <span class="movie-date">${movie.date}</span>
+                    <span class="movie-date">${safeDate}</span>
                     <div class="movie-details">
                         <div class="movie-poster">
                             <img src="${posterSrc}" class="poster-img admin-poster">
@@ -118,8 +120,8 @@ async function renderAdminCalendar() {
                                 <div class="poster-overlay-text">${genreText}${year}</div>
                             </div>
                         </div>
-                        <span class="movie-title">${movie.title}</span>
-                        <p class="add-film-but admin-delete-but" data-id="${movie.id}">Видалити</p>
+                        <span class="movie-title">${safeTitle}</span>
+                        <p class="add-film-but admin-delete-but" data-id="${escapeHTML(movie.id)}">Видалити</p>
                     </div>
                 </div>
             `
@@ -160,7 +162,7 @@ async function showAddCalendar() {
 
     if (allMoviesData.success) {
         allMoviesData.data.forEach(m => {
-            optionsHtml += `<div class="custom-select-option" data-value="${m.id}">${m.title}</div>`
+            optionsHtml += `<div class="custom-select-option" data-value="${escapeHTML(m.id)}">${escapeHTML(m.title)}</div>`
         })
     }
 
@@ -338,28 +340,29 @@ async function renderSuggestions() {
 
     result.data.forEach(movie => {
         const posterSrc = movie.poster
-            ? `https://image.tmdb.org/t/p/w500${movie.poster}`
+            ? `https://image.tmdb.org/t/p/w500${escapeHTML(movie.poster)}`
             : 'https://placehold.co/154x231/374151/FFFFFF?text=?'
 
-        const rating = movie.rating || 'NR'
-        const genreText = movie.genreText || ''
-        const year = movie.year || ''
+        const rating = escapeHTML(movie.rating || 'NR')
+        const genreText = escapeHTML(movie.genreText || '')
+        const year = escapeHTML(movie.year || '')
+        const safeTitle = escapeHTML(movie.title)
 
         html += `
             <div class="movie-card">
                 <div class="movie-details">
                     <div class="movie-poster">
-                        <img src="${posterSrc}" class="poster-img admin-poster" alt="${movie.title}">
+                        <img src="${posterSrc}" class="poster-img admin-poster" alt="${safeTitle}">
 
                         <div class="poster-overlay">
                             <div class="poster-overlay-main">Рейтинг: <span class="poster-overlay-text">${rating}/10</span></div>
                             <div class="poster-overlay-text">${genreText}${year}</div>
                         </div>
                     </div>
-                    <span class="movie-title">${movie.title}</span>
+                    <span class="movie-title">${safeTitle}</span>
                     
-                    <p class="add-film-but admin-plus-but" data-id="${movie.id}">Додати</p>
-                    <p class="add-film-but admin-delete-but" data-id="${movie.id}">Видалити</p>
+                    <p class="add-film-but admin-plus-but" data-id="${escapeHTML(movie.id)}">Додати</p>
+                    <p class="add-film-but admin-delete-but" data-id="${escapeHTML(movie.id)}">Видалити</p>
                 </div>
             </div>
         `
@@ -409,9 +412,9 @@ async function loadStats() {
 
         let html = ''
         for (const [rawQuestion, data] of Object.entries(stats)) {
-            const displayQuestion = questionMap[rawQuestion] || rawQuestion
-            const avg = data.score
-            const votes = data.votes
+            const displayQuestion = escapeHTML(questionMap[rawQuestion] || rawQuestion)
+            const avg = escapeHTML(data.score)
+            const votes = escapeHTML(data.votes)
 
             html += `
                 <div class="rating-row">
