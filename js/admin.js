@@ -92,6 +92,12 @@ async function renderAdminCalendar() {
     if (result.success && result.data.length > 0) {
         const now = Date.now()
 
+        result.data.sort((a, b) => {
+            const dateA = a.parsedDate || Infinity
+            const dateB = b.parsedDate || Infinity
+            return dateA - dateB
+        })
+
         for (const movie of result.data) {
             if (movie.parsedDate && movie.parsedDate < now) {
                 await deleteCalendar(movie.id)

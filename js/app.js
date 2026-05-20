@@ -100,6 +100,12 @@ async function renderMainCalendar() {
         return movie.parsedDate > now
     })
 
+    activeMovies.sort((a, b) => {
+        const dateA = a.parsedDate || Infinity
+        const dateB = b.parsedDate || Infinity
+        return dateA - dateB
+    })
+
     if (activeMovies.length === 0) {
         mainCalendarList.innerHTML = '<p class="main-text">Поки немає запланованих показів</p>'
         return
